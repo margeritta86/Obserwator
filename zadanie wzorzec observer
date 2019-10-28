@@ -1,0 +1,67 @@
+Kolej na Ciebie - Obserwator
+Prognoza pogody
+Najwyższa pora zabrać się do kodowania! Uruchom swoje ulubione IDE i utwórz nowy, pusty projekt.
+
+Twoim pierwszym zadaniem będzie utworzenie systemu powiadomień o zmianach pogody.
+Do tego celu idealnie posłuży wzorzec Observer.
+
+Aby to zrobić poprawnie należy utworzyć dwa interfejsy.
+Pierwszym będzie interfejs o nazwie Observable zawierający deklarację trzech metod z dostępem domyślnym:
+
+void registerObserver(Observer observer)
+void unregisterObserver(Observer observer)
+void notifyObservers()
+
+
+Interfejs ten będzie implementowany przez klasę o nazwie WeatherForecast .
+Ta klasa powinna zawierać trzy prywatne pola:
+
+int temperature
+int pressure
+Set<Observer> registeredObservers = new HashSet<Observer>()
+
+
+Oprócz tego w tej klasie powinny znaleźć się również implementacje metod z interfejsu Observable .
+
+
+Do poprawnego działania wzorca potrzebny będzie jeszcze jeden interfejs: Observer .
+Będzie on posiadał deklarację jednej metody z dostępem domyślnym
+(powinien być umieszczony w innej paczce niż interfejs Observable):
+
+void updateForecast(WeatherForecast weatherForecast)
+
+
+Interfejs ten powinien być implementowany przez trzy klasy obserwatorów: TvNews, RadioNews oraz InternetNews.
+Każda z tych klas musi oczywiście zaimplementować również metodę updateForecast.
+
+
+Po pomyślnym zaimplementowaniu powyższych klas i metod, po wywołaniu poniższego kodu z metody main:
+
+ WeatherForecast weatherForecast = new WeatherForecast(25, 1003);
+ RadioNews radioNews = new RadioNews();
+ InternetNews internetNews = new InternetNews();
+ TvNews tvNews = new TvNews();
+ weatherForecast.registerObserver(radioNews);
+ weatherForecast.registerObserver(internetNews);
+ weatherForecast.registerObserver(tvNews);
+ weatherForecast.notifyObservers();
+ weatherForecast.unregisterObserver(tvNews);
+ weatherForecast.unregisterObserver(radioNews);
+ System.out.println("Nowa prognoza - powiadomienie tylko dla serwisu internetowego:");
+ weatherForecast.updateForecast(18, 1007);
+powinniśmy uzyskać efekt podobny do tego poniżej:
+
+Radio - nowa prognoza pogody: temperatura: 25 stopni, ciśnienie: 1003hPa
+Telewizja - nowa prognoza pogody: temperatura: 25 stopni, ciśnienie: 1003hPa
+Internet - nowa prognoza pogody: temperatura: 25 stopni, ciśnienie: 1003hPa
+Nowa prognoza - powiadomienie tylko dla serwisu internetowego:
+Internet - nowa prognoza pogody: temperatura: 18 stopni, ciśnienie: 1007hPa
+
+
+Wszystko zależy oczywiście od tego w jaki sposób zaimplementowane będą komunikaty z metod w klasach obserwatorów.
+
+
+
+Powodzenia!
+
+Gotowe rozwiązanie zadania znajduje się na githubie (branch observer-task).
