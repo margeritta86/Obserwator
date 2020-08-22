@@ -59,9 +59,3 @@ Internet - nowa prognoza pogody: temperatura: 18 stopni, ciśnienie: 1007hPa
 
 
 Wszystko zależy oczywiście od tego w jaki sposób zaimplementowane będą komunikaty z metod w klasach obserwatorów.
-
-
-
-Powodzenia!
-
-Gotowe rozwiązanie zadania znajduje się na githubie (branch observer-task).
